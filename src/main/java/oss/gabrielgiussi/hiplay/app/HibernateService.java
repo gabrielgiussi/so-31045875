@@ -31,7 +31,7 @@ public class HibernateService {
 
   @Transactional
   public void service() {
-    log.debug("########## Starting test ##########");
+    log.debug("########## Starting test 1 ##########");
 
     log.debug("########## Retrieving A1 ##########");
     EntityA a1 = (EntityA) getSession().get(EntityA.class, Long.valueOf(1));
@@ -53,6 +53,38 @@ public class HibernateService {
       log.debug("########## The object hasn't been loaded twice ##########");
     }
 
+  }
+
+  @Transactional
+  public EntityB service2() {
+    log.debug("########## Starting test 2 ##########");
+
+    log.debug("########## Retrieving A1 ##########");
+    EntityA a1 = (EntityA) getSession().get(EntityA.class, Long.valueOf(1));
+
+    log.debug("########## Force A1 setOfB initialization ##########");
+    a1.getSetOfB().size();
+
+    return a1.getSetOfB().iterator().next();
+  }
+
+  @Transactional
+  public Object[] service3() {
+    log.debug("########## Starting test 3 ##########");
+
+    log.debug("########## Retrieving A1 ##########");
+    EntityA a1 = (EntityA) getSession().get(EntityA.class, Long.valueOf(1));
+
+    log.debug("########## Force A1 setOfB initialization ##########");
+    a1.getSetOfB().size();
+
+    EntityB b1 = a1.getSetOfB().iterator().next();
+
+    b1.getSetOfA().size();
+
+    return new Object[] {
+        b1, a1
+    };
   }
 
   protected Session getSession() {
