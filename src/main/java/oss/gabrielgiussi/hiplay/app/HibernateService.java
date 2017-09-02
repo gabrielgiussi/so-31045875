@@ -30,6 +30,22 @@ public class HibernateService {
     @Transactional
     public void loadOneDepartment() {
 
+        log.debug("########## " + logPrefix + " Loading a single Department with id 1 ##########");
+
+        IDepartment dep = (IDepartment) getSession().get(clazz,1);
+
+        log.debug("########## " + logPrefix + " Forcing Employees initialization of Department with id 1 ########## ");
+        dep.getEmployees().get(0).toString();
+    }
+
+    @Transactional
+    public void loadNDepartments() {
+        log.debug("########## " + logPrefix + " Loading all Departments ##########");
+
+        List<IDepartment> deps = (List<IDepartment>) getSession().createCriteria(clazz).setMaxResults(2).list();
+
+        log.debug("########## " + logPrefix + " Forcing Employees initialization of first Department ########## ");
+        deps.get(0).getEmployees().get(0).toString();
     }
 
     @Transactional
@@ -39,7 +55,7 @@ public class HibernateService {
 
         List<IDepartment> deps = (List<IDepartment>) getSession().createCriteria(clazz).list();
 
-        log.debug("########## " + logPrefix + " Forcing Employees initialization of first SelectDepartment ########## ");
+        log.debug("########## " + logPrefix + " Forcing Employees initialization of first Department ########## ");
         deps.get(0).getEmployees().get(0).toString();
 
     }

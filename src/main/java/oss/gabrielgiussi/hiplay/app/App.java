@@ -8,14 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import oss.gabrielgiussi.hiplay.select.SelectDepartment;
 import oss.gabrielgiussi.hiplay.subselect.SubselectDepartment;
-
-import javax.persistence.EntityManagerFactory;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {HibernateJpaAutoConfiguration.class})
@@ -48,9 +45,45 @@ public class App implements CommandLineRunner {
   // }
 
   public void run(String... args) throws Exception {
-    subselectService().loadAllDepartments();
+    scenario1();
+    scenario2();
+    scenario3();
 
+  }
+
+  public void scenario1(){
+
+    log.debug("########## Scenario 1: Testing FetchModes querying a single Department  ##########");
+
+    log.debug("########## Scenario 1.1 SingleDepartment:SELECT ##########");
+    selectService().loadOneDepartment();
+
+    log.debug("########## Scenario 1.2 SingleDepartment:SUBSELECT ##########");
+    subselectService().loadOneDepartment();
+
+  }
+
+  public void scenario2(){
+
+    log.debug("########## Scenario 2: Testing FetchModes querying 2 Departments (of 3)  ##########");
+
+    log.debug("########## Scenario 2.1 SubsetOfDepartments:SELECT ##########");
+    selectService().loadNDepartments();
+
+    log.debug("########## Scenario 2.2 SubsetOfDepartments:SUBSELECT  ##########");
+    subselectService().loadNDepartments();
+
+  }
+
+  public void scenario3(){
+
+    log.debug("########## Scenario 3: Testing FetchModes querying all Departments  ##########");
+
+    log.debug("########## Scenario 3.1 AllDepartments:SELECT  ##########");
     selectService().loadAllDepartments();
+
+    log.debug("########## Scenario 3.2 AllDepartments:SUBSELECT  ##########");
+    subselectService().loadAllDepartments();
 
   }
 
