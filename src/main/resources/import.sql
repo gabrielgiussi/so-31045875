@@ -1,11 +1,40 @@
-insert into entitya (id,description) values (1,'a1');
-insert into entitya (id,description) values (2,'a2');
-insert into entitya (id,description) values (3,'a3');
+-- SUBSELECT TABLES
 
-insert into entityb (id,description) values (1,'b1');
-insert into entityb (id,description) values (2,'b2');
-insert into entityb (id,description) values (3,'b3');
+insert into SUBSELECT_DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME,LOCATION) values (1,'Sales','La Plata');
+insert into SUBSELECT_DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME,LOCATION) values (2,'RRHH','La Plata');
 
-insert into relations (id_a,id_b) values (1,1);
-insert into relations (id_a,id_b) values (1,2);
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (100,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (101,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (102,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (103,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (104,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (105,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (106,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (107,'Alejandro',1)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (108,'Alejandro',1)
 
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (200,'Gabriel',2)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (201,'Gabriel',2)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (202,'Gabriel',2)
+insert into SUBSELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (203,'Gabriel',2)
+
+
+--  SELECT TABLES
+
+insert into SELECT_DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME,LOCATION) values (1,'Sales','La Plata');
+insert into SELECT_DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME,LOCATION) values (2,'RRHH','La Plata');
+
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (100,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (101,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (102,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (103,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (104,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (105,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (106,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (107,'Alejandro',1)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (108,'Alejandro',1)
+
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (200,'Gabriel',2)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (201,'Gabriel',2)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (202,'Gabriel',2)
+insert into SELECT_EMPLOYEE (EMPLOYEE_ID,EMPLOYEE_NAME,DEPARTMENT_ID) values (203,'Gabriel',2)

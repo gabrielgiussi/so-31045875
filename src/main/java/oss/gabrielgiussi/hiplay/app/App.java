@@ -7,22 +7,34 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
+import oss.gabrielgiussi.hiplay.select.SelectDepartment;
+import oss.gabrielgiussi.hiplay.subselect.SubselectDepartment;
 
-import oss.gabrielgiussi.hiplay.entities.EntityA;
-import oss.gabrielgiussi.hiplay.entities.EntityB;
+import javax.persistence.EntityManagerFactory;
 
 @SpringBootApplication
-@EntityScan(basePackages = "oss.gabrielgiussi.hiplay.entities")
+@EntityScan(basePackages = {"oss.gabrielgiussi.hiplay.select", "oss.gabrielgiussi.hiplay.subselect"})
 public class App implements CommandLineRunner {
 
   private static final Logger log = LoggerFactory.getLogger(HibernateService.class);
 
   @Autowired
-  HibernateService service;
+  EntityManagerFactory factory;
 
   public static void main(String[] args) {
     SpringApplication.run(App.class, args);
     System.exit(0);
+  }
+
+  @Bean
+  public HibernateService subselectService(){
+    return new HibernateService(factory, SubselectDepartment.class,"[FetchMode.SUBSELECT]");
+  }
+
+  @Bean
+  public HibernateService selectService(){
+    return new HibernateService(factory, SelectDepartment.class,"[FetchMode.SELECT]");
   }
 
   // @Bean
@@ -31,29 +43,9 @@ public class App implements CommandLineRunner {
   // }
 
   public void run(String... args) throws Exception {
-    int test = Integer.parseInt(args[0]);
-    switch (test) {
-    case 1:
-      service.service();
-      break;
-    case 2:
-      EntityB detachedB = service.service2();
-      try {
-        detachedB.getSetOfA().size();
-      } catch (org.hibernate.LazyInitializationException e) {
-        log.debug("########## You are trying to initialize a outside a transaction. ##########");
-      }
-    case 3:
-      Object[] aAndB = service.service3();
-      EntityB b1 = (EntityB) aAndB[0];
-      EntityA a1 = (EntityA) aAndB[1];
-      if (b1.getSetOfA().iterator().next() == a1) {
-        log.debug("########## B1.setOfA.get(0) points to the instance A1 loaded by session.get('A',1). ##########");
-      }
+    subselectService().loadAllDepartments();
 
-    default:
-      break;
-    }
+    selectService().loadAllDepartments();
 
   }
 
