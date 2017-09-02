@@ -5,10 +5,8 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import oss.gabrielgiussi.hiplay.subselect.SubselectDepartment;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
 import java.util.List;
 
 public class HibernateService {
@@ -22,10 +20,11 @@ public class HibernateService {
   protected String logPrefix;
 
   @Autowired
-  public HibernateService(EntityManagerFactory factory, Class clazz, String logPrefix) {
+  public HibernateService(SessionFactory factory, Class clazz, String logPrefix) {
       this.logPrefix = logPrefix;
       this.clazz = clazz;
-    this.sessionFactory = factory.unwrap(SessionFactory.class);
+      this.sessionFactory = factory;
+
   }
 
     @Transactional
