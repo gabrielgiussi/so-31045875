@@ -13,6 +13,7 @@ public class SubselectEmployee {
     @Column(name = "EMPLOYEE_NAME")
     private String employeeName;
 
+
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT_ID")
     private SubselectDepartment department;
