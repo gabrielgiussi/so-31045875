@@ -60,19 +60,12 @@ public class App implements CommandLineRunner {
   // return new HibernateJpaSessionFactoryBean();
   // }
 
-    // This is not fetched Employees but fetched collection of employees.
-    private void assertFetchedCollectiosOfEmployees(CollectionStatistics stats, long fetched){
-        Assert.isTrue(stats.getFetchCount() == fetched, "########## ASSERTION ERROR: Expected: " + fetched + " but actually fetched " + stats.getFetchCount() + " ##########");
-    }
-
     public void run(String... args) throws Exception {
 
         try {
-            /*
             scenario1(); // SingleDepartment
             scenario2(); // SubsetOfDepartments
             scenario3(); // AllDepartments
-            */
             log.debug("########## All Assertions Correct ##########");
         } catch (java.lang.IllegalArgumentException e){
             log.error(e.getMessage());
