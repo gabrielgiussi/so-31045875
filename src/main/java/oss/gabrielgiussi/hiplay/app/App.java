@@ -66,6 +66,7 @@ public class App implements CommandLineRunner {
             scenario1(); // SingleDepartment
             scenario2(); // SubsetOfDepartments
             scenario3(); // AllDepartments
+            scenario4(); // DepartmentsGreaterEqualThanB
             log.debug("########## All Assertions Correct ##########");
         } catch (java.lang.IllegalArgumentException e){
             log.error(e.getMessage());
@@ -94,7 +95,8 @@ public class App implements CommandLineRunner {
         stats13.assertFetchedCollectionOfEmployees(1);
         stats13.assertFetchedEmployees(DEP1_EMPLOYEES);
 
-
+// por un lado levanta departments, dsp levanta employees usando la misma query
+        // pero dsp como sabe que empleados van a la lista de que Departamento? (en este caso lo podria hacer en base al id_departamente que tiene) USA ESO?
 
     }
 
@@ -145,6 +147,28 @@ public class App implements CommandLineRunner {
         stats33.assertFetchedCollectionOfEmployees(3);
         stats33.assertFetchedEmployees(DEP1_EMPLOYEES + DEP2_EMPLOYEES + DEP3_EMPLOYEES);
 
+    }
+
+    public void scenario4(){
+        log.debug("########## Scenario 4: Testing FetchModes querying Departments with departmentName greater or equal than 'B'  ##########");
+
+        log.debug("########## Scenario 4.1 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
+        ExampleStatistics stats41 = selectService().loadDepartmentsWithNameGreaterThanB();
+        stats41.assertFetchedDepartments(2);
+        stats41.assertFetchedCollectionOfEmployees(2);
+        stats41.assertFetchedEmployees(DEP2_EMPLOYEES + DEP3_EMPLOYEES);
+
+        log.debug("########## Scenario 4.1 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
+        ExampleStatistics stats42 = subselectService().loadDepartmentsWithNameGreaterThanB();
+        stats42.assertFetchedDepartments(2);
+        stats42.assertFetchedCollectionOfEmployees(2);
+        stats42.assertFetchedEmployees(DEP2_EMPLOYEES + DEP3_EMPLOYEES);
+
+        log.debug("########## Scenario 4.3 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
+        ExampleStatistics stats43 = batchService().loadDepartmentsWithNameGreaterThanB();
+        stats43.assertFetchedDepartments(2);
+        stats43.assertFetchedCollectionOfEmployees(2);
+        stats43.assertFetchedEmployees(DEP2_EMPLOYEES + DEP3_EMPLOYEES);
     }
 
 }

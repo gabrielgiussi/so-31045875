@@ -2,6 +2,8 @@ package oss.gabrielgiussi.hiplay.app;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.stat.CollectionStatistics;
 import org.hibernate.stat.Statistics;
 import org.slf4j.Logger;
@@ -63,6 +65,22 @@ public class HibernateService {
         }
 
         return stats();
+    }
+
+    @Transactional
+    public ExampleStatistics loadDepartmentsWithNameGreaterThanB() {
+      clearStats();
+
+        log.debug("########## " + logPrefix + " Loading Departments B and C ##########");
+
+        List<IDepartment> deps = (List<IDepartment>) getSession().createCriteria(getDepClazz()).add(Restrictions.ge("departmentName","B")).list();
+
+        log.debug("########## " + logPrefix + " Forcing Employees initialization of first Department ########## ");
+        for (IDepartment dep : deps) {
+            dep.getEmployees().get(0).toString();
+        }
+
+      return stats();
     }
 
     @Transactional
