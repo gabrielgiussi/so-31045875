@@ -152,19 +152,19 @@ public class App implements CommandLineRunner {
     public void scenario4(){
         log.debug("########## Scenario 4: Testing FetchModes querying Departments with departmentName greater or equal than 'B'  ##########");
 
-        log.debug("########## Scenario 4.1 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
+        log.debug("########## Scenario 4.1 DepartmentsGreaterOrEqualB:SELECT ##########");
         ExampleStatistics stats41 = selectService().loadDepartmentsWithNameGreaterThanB();
         stats41.assertFetchedDepartments(2);
         stats41.assertFetchedCollectionOfEmployees(2);
         stats41.assertFetchedEmployees(DEP2_EMPLOYEES + DEP3_EMPLOYEES);
 
-        log.debug("########## Scenario 4.1 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
+        log.debug("########## Scenario 4.2 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
         ExampleStatistics stats42 = subselectService().loadDepartmentsWithNameGreaterThanB();
         stats42.assertFetchedDepartments(2);
         stats42.assertFetchedCollectionOfEmployees(2);
         stats42.assertFetchedEmployees(DEP2_EMPLOYEES + DEP3_EMPLOYEES);
 
-        log.debug("########## Scenario 4.3 DepartmentsGreaterOrEqualB:SUBSELECT ##########");
+        log.debug("########## Scenario 4.3 DepartmentsGreaterOrEqualB:BATCH ##########");
         ExampleStatistics stats43 = batchService().loadDepartmentsWithNameGreaterThanB();
         stats43.assertFetchedDepartments(2);
         stats43.assertFetchedCollectionOfEmployees(2);
